@@ -1,478 +1,571 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haider Dawood Khan</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- CSS Variables (New "Modern Indigo" Palette) --- */
-        :root {
-            --primary-color: #312e81; /* Deep Indigo (Intellectual, Tech-focused) */
-            --accent-color: #6366f1;  /* Vibrant Violet-Blue (Creative) */
-            --accent-light: #e0e7ff;  /* Soft Indigo Mist */
-            --text-dark: #1f2937;
-            --text-light: #6b7280;
-            --bg-white: #ffffff;
-            --bg-off-white: #f9fafb;
-            --font-header: 'Montserrat', sans-serif;
-            --font-body: 'Open Sans', sans-serif;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --transition: all 0.3s ease;
-        }
-
-        /* --- Reset & Base Styles --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: var(--font-body);
-            color: var(--text-dark);
-            background-color: var(--bg-off-white);
-            line-height: 1.7;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        h1, h2, h3, .logo {
-            font-family: var(--font-header);
-            font-weight: 700;
-            color: var(--primary-color);
-            cursor: pointer; /* Add this line */
-
-        }
-
-        a { text-decoration: none; color: inherit; transition: var(--transition); }
-        ul { list-style: none; }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 25px;
-            position: relative;
-        }
-
-        /* --- Navigation --- */
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid #e5e7eb;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            letter-spacing: -0.5px;
-        }
-        
-        .logo span { color: var(--accent-color); }
-
-        .nav-links { display: flex; gap: 25px; align-items: center; }
-        
-        .nav-links a {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover, .nav-links a.active { color: var(--accent-color); transform: translateY(-1px); }
-        
-        /* --- Hero Section (Clean, No Pattern) --- */
-        .hero-section {
-            padding: 100px 0;
-            background-color: #fff;
-            /* Removed the dot pattern here */
-            border-bottom: 1px solid #f3f4f6;
-            overflow: hidden;
-        }
-
-        .hero-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 50px;
-        }
-
-        .hero-text-box {
-            flex: 1.2;
-            z-index: 2;
-            animation: fadeInLeft 0.8s ease-out;
-        }
-        
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .hero-text-box h1 {
-            font-size: 3.5rem;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-        }
-
-        .highlight { 
-            color: var(--accent-color); 
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Highlight Underline */
-        .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background-color: var(--accent-light);
-            z-index: -1;
-            transform: skewX(-10deg);
-        }
-
-        .bio-text {
-            font-size: 1.15rem;
-            color: var(--text-light);
-            margin-bottom: 35px;
-            max-width: 500px;
-        }
-
-        .hero-image-box {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* Decorative Blob behind image */
-        .blob-bg {
-            position: absolute;
-            width: 380px;
-            height: 380px;
-            background-color: var(--accent-light);
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            z-index: 1;
-            animation: blobMorph 8s infinite alternate;
-        }
-        
-        @keyframes blobMorph {
-            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-        }
-
-        .profile-img-wrapper {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 5px solid #fff;
-            box-shadow: var(--shadow);
-            position: relative;
-            z-index: 2;
-            background: #fff;
-        }
-        
-        .profile-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .img-placeholder {
-            width: 100%;
-            height: 100%;
-            background: #f3f4f6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: #d1d5db;
-        }
-
-        /* --- About Me Section --- */
-        .about-section {
-            padding: 80px 0;
-            background-color: var(--bg-off-white);
-        }
-        
-        .about-content h2 {
-            font-size: 2rem;
-            margin-bottom: 25px;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .about-content h2::before {
-            content: '';
-            width: 30px;
-            height: 4px;
-            background: var(--accent-color);
-            border-radius: 2px;
-        }
-        
-        .about-text p {
-            margin-bottom: 20px;
-            font-size: 1.05rem;
-            color: var(--text-dark);
-            max-width: 100%;
-        }
-
-        /* --- Projects Section --- */
-        .section-header { text-align: center; margin-bottom: 60px; margin-top: 60px; }
-        .section-header h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        .subtitle { color: var(--text-light); font-size: 1.1rem; }
-
-        .projects-list {
-            padding-bottom: 80px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
-
-        .project-card {
-            background: #fff;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            border: 1px solid #f3f4f6;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Colored top accent line */
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 4px;
-            background: var(--accent-color);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow);
-        }
-        
-        .project-card:hover::before { transform: scaleX(1); }
-
-        .project-card h3 { font-size: 1.4rem; margin-bottom: 10px; }
-        
-        .tech-stack {
-            font-size: 0.8rem;
-            color: var(--accent-color);
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .project-desc {
-            color: var(--text-light);
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-family: var(--font-header);
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: #fff;
-            box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
-        }
-        .btn-primary:hover { background-color: var(--primary-color); transform: translateY(-2px); }
-
-        .btn-outline {
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 10px 24px;
-        }
-        .btn-outline:hover { background-color: var(--accent-color); color: #fff; }
-
-        /* Footer */
-        .footer {
-            background: var(--primary-color);
-            color: #e0e7ff;
-            text-align: center;
-            padding: 40px 0;
-            margin-top: auto;
-        }
-        
-        .footer p { opacity: 0.8; font-size: 0.9rem; }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .hero-container { flex-direction: column-reverse; text-align: center; gap: 30px; }
-            .hero-image-box { justify-content: center; width: 100%; }
-            .blob-bg { width: 280px; height: 280px; }
-            .profile-img-wrapper { width: 220px; height: 220px; }
-            
-            .navbar-content { flex-direction: column; height: auto; padding: 15px 0; }
-            .nav-links { flex-wrap: wrap; justify-content: center; margin-top: 15px; }
-            .hero-text-box h1 { font-size: 2.5rem; }
-            .highlight::after { bottom: 2px; height: 8px; }
-        }
-
-        /* View Toggle Logic */
-        .view-section { display: none; }
-        .view-section.active-view { display: block; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
-</head>
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container navbar-content">
-            <a onclick="switchView('home')" class="logo">HDK<span>.</span></a>
-            <ul class="nav-links">
-                <li><a href="assets/resume.pdf" target="_blank">Resume</a></li>
-                <li><a onclick="switchView('projects')" id="nav-projects">Projects</a></li>
-                <!-- Socials with Text -->
-                <li><a href="https://github.com/HaiderDawoodKhan" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
-                <li><a href="https://linkedin.com/in/haider-dawood" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- HOME VIEW -->
-    <main id="home-view" class="view-section active-view">
-        
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="container hero-container">
-                <div class="hero-text-box">
-                    <h1>Hello, I'm <br> <span class="highlight">Haider Dawood Khan.</span></h1>
-                    <p class="bio-text">Aspiring ML & LLM Researcher | Senior Lab Lead at CSaLT.</p>
-                    <a href="mailto:26100053@lums.edu.pk" class="btn btn-primary">Contact Me</a>
-                </div>
-                
-                <div class="hero-image-box">
-                    <!-- Creative Blob Background -->
-                    <div class="blob-bg"></div>
-                    
-                    <div class="profile-img-wrapper">
-                        <!-- Replace with assets/profile.jpg -->
-                        <img src="assets/profile.jpg" alt="Haider Dawood Khan">
-                         <div class="img-placeholder"><i class="fas fa-user"></i></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="about-section">
-            <div class="container about-content">
-                <h2>About Me</h2>
-                <div class="about-text">
-                    <p>
-                       I am Haider Dawood Khan, a senior Computer Science student at the Lahore University of Management Sciences (LUMS). My research interests lie in Applied Deep Learning, Machine Learning, and Large Language Models, with a broader curiosity for anything ML-related.
-                    </p>
-                    <p>
-                        I currently serve as the Senior Lab Lead at the Center for Speech and Language Technologies (CSaLT), working under the mentorship of Dr. Agha Ali Raza. At the lab, I am currently reseaching on the generalizability and interpretablity of audio deepfake detection models and the accuracy-fairness tradeoff in LLMs.
-                    </p>
-                    <p>
-                        Outside academics, I am an avid cricket fan - watching, playing, and obsessing over the sport whenever I can. I love staying active and enjoy a range of sports including badminton, padel, and table tennis. I also love to travel, explore new places, and experience different cultures.
-                    </p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- PROJECTS VIEW -->
-    <main id="projects-view" class="view-section">
-        <div class="container">
-            <section class="section-header">
-                <h1>My (Selected) Projects</h1>
-                <p class="subtitle">A selection of my academic research and technical work.</p>
-            </section>
-
-            <section class="projects-list">
-                <!-- Project 1 -->
-                <div class="project-card">
-                    <h3>Inductive Biases & Generalization in Deep Learning Models</h3>
-                    <p class="tech-stack">Inductive Biases, OOD Generalization, Vision Models</p>
-                    <p class="project-desc">A comparative study of CNNs, ViTs, VAEs, GANs, and CLIP to uncover how architectural and semantic inductive biases shape robustness and out-of-distribution performance. Evaluated color/texture/shape bias, invariance properties, generative behavior, and zero-shot transfer under domain shifts.</p>
-                    <a href="assets/report1.pdf" target="_blank" class="btn btn-outline">View Report</a>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="project-card">
-                    <h3>Domain Adaptation, Generalization & Prompt Tuning Across Vision and Vision-Language Models</h3>
-                    <p class="tech-stack">Domain Robustness, CLIP Tuning, Cross-Domain Learning</p>
-                    <p class="project-desc">A comprehensive evaluation of domain adaptation (DAN, DANN, CDAN), domain generalization (ERM, IRM, SAM, GDRO), and prompt-tuning strategies across PACS domains. Shows how invariance, discriminability, and prompt drift shape performance in unseen or stylistically shifted domains.</p>
-                    <a href="assets/report2.pdf" target="_blank" class="btn btn-outline">View Report</a>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-card">
-                    <h3>Federated Learning Under Heterogeneity: Drift, Convergence & Algorithmic Trade-offs</h3>
-                    <p class="tech-stack">Statistical Heterogeneity, Client Drift, Non-IID</p>
-                    <p class="project-desc">A deep empirical study comparing FedSGD, FedAvg, FedProx, FedSAM, FedGH, and SCAFFOLD under varying data heterogeneity. Highlights how drift correction, sharpness-aware updates, and gradient harmonization affect convergence and accuracy on non-IID clients.</p>
-                    <a href="assets/report3.pdf" target="_blank" class="btn btn-outline">View Report</a>
-                </div>
-
-                <div class="project-card">
-                    <h3>Model Compression</h3>
-                    <p class="tech-stack">Pruning, Quantization & Knowledge Distillation</p>
-                    <p class="project-desc">An evaluation of pruning, quantization, and distillation techniques on VGG and ResNet models to assess accuracy–efficiency trade-offs. Shows how structured pruning, mixed-precision quantization, and feature-based distillation yield the best balance for edge deployment.</p>
-                    <a href="assets/report3.pdf" target="_blank" class="btn btn-outline">View Report</a>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Haider Dawood Khan.</p>
-        </div>
-    </footer>
-
-    <!-- Script to toggle views -->
-    <script>
-        function switchView(viewName) {
-            document.getElementById('home-view').classList.remove('active-view');
-            document.getElementById('projects-view').classList.remove('active-view');
-            
-            const links = document.querySelectorAll('.nav-links a');
-            links.forEach(link => link.classList.remove('active'));
-
-            if (viewName === 'home') {
-                document.getElementById('home-view').classList.add('active-view');
-            } else if (viewName === 'projects') {
-                document.getElementById('projects-view').classList.add('active-view');
-                document.getElementById('nav-projects').classList.add('active');
-            }
-            window.scrollTo(0, 0);
-        }
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f8fa" />
+    <meta
+      name="description"
+      content="Haider Dawood Khan is an M.S. Computer Science and Engineering student at the University of Michigan studying language-model post-training, reasoning, and multimodal learning."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Haider Dawood Khan | ML Research" />
+    <meta
+      property="og:description"
+      content="M.S. CSE at the University of Michigan. Research interests in LLM post-training, reasoning, vision-language models, and efficient ML."
+    />
+    <meta property="og:url" content="https://haiderdawoodkhan.github.io/" />
+    <meta
+      property="og:image"
+      content="https://haiderdawoodkhan.github.io/assets/profile.jpg"
+    />
+    <meta property="og:image:alt" content="Haider Dawood Khan" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>Haider Dawood Khan | ML Research</title>
+    <link rel="canonical" href="https://haiderdawoodkhan.github.io/" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Fira+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Haider Dawood Khan",
+        "url": "https://haiderdawoodkhan.github.io/",
+        "image": "https://haiderdawoodkhan.github.io/assets/profile.jpg",
+        "email": "haiderdawood92@gmail.com",
+        "jobTitle": "M.S. Computer Science and Engineering student",
+        "affiliation": {
+          "@type": "CollegeOrUniversity",
+          "name": "University of Michigan"
+        },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Lahore University of Management Sciences"
+        },
+        "sameAs": [
+          "https://github.com/HaiderDawoodKhan/",
+          "https://www.linkedin.com/in/haider-dawood"
+        ]
+      }
     </script>
-</body>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="nav-shell">
+        <a class="wordmark" href="#top" aria-label="Haider Dawood Khan, home">
+          <span class="wordmark-name">Haider Dawood Khan</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+        >
+          <span class="menu-toggle-label">Menu</span>
+          <span class="menu-toggle-icon" aria-hidden="true"><i></i><i></i></span>
+        </button>
+
+        <nav id="primary-navigation" class="primary-navigation" aria-label="Main navigation">
+          <a href="#focus">Focus</a>
+          <a href="#experience">Experience</a>
+          <a href="#research">Research</a>
+          <a href="#projects">Projects</a>
+          <a href="#education">Education</a>
+          <a class="nav-contact" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero section-wrap" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="hero-affiliation">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span class="hero-degree">M.S. Computer Science &amp; Engineering</span>
+            <span class="affiliation-divider" aria-hidden="true">/</span>
+            <span class="hero-school">University of Michigan, Ann Arbor</span>
+          </p>
+          <h1 id="hero-title">Haider<br /><span>Dawood Khan</span></h1>
+          <p class="hero-statement">
+            I study how language models reason, align, and work across vision and text.
+          </p>
+          <p class="hero-topics">LLMs <span>·</span> Post-training <span>·</span> Reasoning <span>·</span> Multimodal learning</p>
+          <div class="hero-links" aria-label="Quick links">
+            <a href="https://github.com/HaiderDawoodKhan/" target="_blank" rel="noopener noreferrer">
+              GitHub <span aria-hidden="true">↗</span>
+            </a>
+            <a href="https://www.linkedin.com/in/haider-dawood" target="_blank" rel="noopener noreferrer">
+              LinkedIn <span aria-hidden="true">↗</span>
+            </a>
+            <a href="mailto:haiderdawood92@gmail.com">Email <span aria-hidden="true">↗</span></a>
+            <a href="assets/resume.pdf" target="_blank" rel="noopener noreferrer">
+              CV <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <figure class="hero-portrait">
+          <img
+            src="assets/profile.jpg"
+            alt="Haider Dawood Khan"
+            width="1841"
+            height="1969"
+            fetchpriority="high"
+          />
+        </figure>
+        <a class="scroll-note" href="#focus"><span aria-hidden="true">↓</span> Scroll to explore</a>
+      </section>
+
+      <section class="focus-section section-wrap section-rule" id="focus" aria-labelledby="focus-title">
+        <header class="section-heading">
+          <h2 id="focus-title">Research Interests</h2>
+        </header>
+
+        <div class="focus-grid">
+          <article class="focus-item">
+            <span class="focus-index">A</span>
+            <div>
+              <h3>LLM post-training</h3>
+              <p>Preference optimization, RL-based post-training, and how alignment changes model behavior.</p>
+            </div>
+          </article>
+          <article class="focus-item">
+            <span class="focus-index">B</span>
+            <div>
+              <h3>Reasoning</h3>
+              <p>Latent reasoning, test-time computation, and reinforcement learning for more capable inference.</p>
+            </div>
+          </article>
+          <article class="focus-item">
+            <span class="focus-index">C</span>
+            <div>
+              <h3>Multimodal intelligence</h3>
+              <p>Vision-language models that preserve and use visual evidence throughout reasoning.</p>
+            </div>
+          </article>
+          <article class="focus-item">
+            <span class="focus-index">D</span>
+            <div>
+              <h3>Efficient machine learning</h3>
+              <p>Compression and training or inference methods that make useful models less costly to run.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="experience-section section-wrap section-rule" id="experience" aria-labelledby="experience-title">
+        <header class="section-heading">
+          <h2 id="experience-title">Experience</h2>
+        </header>
+
+        <div class="timeline" aria-label="Professional and research experience">
+          <article class="timeline-item timeline-item-right">
+            <div class="timeline-content">
+              <p class="timeline-date"><time datetime="2026-08">Aug 2026</time> – Present</p>
+              <p class="timeline-org">University of Michigan · LSA Physics</p>
+              <h3>Graduate Student Instructor</h3>
+            </div>
+            <span class="timeline-marker" aria-hidden="true">01</span>
+          </article>
+
+          <article class="timeline-item timeline-item-left">
+            <div class="timeline-content">
+              <p class="timeline-date"><time datetime="2026-05">May 2026</time> – <time datetime="2026-08">Aug 2026</time></p>
+              <p class="timeline-org">Lahore University of Management Sciences</p>
+              <h3>Research Assistant</h3>
+            </div>
+            <span class="timeline-marker" aria-hidden="true">02</span>
+          </article>
+
+          <article class="timeline-item timeline-item-right">
+            <div class="timeline-content">
+              <p class="timeline-date"><time datetime="2025-06">Jun 2025</time> – <time datetime="2025-09">Sep 2025</time></p>
+              <p class="timeline-org">Motive</p>
+              <h3>AI/ML Research &amp; Development Intern</h3>
+            </div>
+            <span class="timeline-marker" aria-hidden="true">03</span>
+          </article>
+
+          <article class="timeline-item timeline-item-left">
+            <div class="timeline-content">
+              <p class="timeline-date"><time datetime="2025-05">May 2025</time> – <time datetime="2026-06">Jun 2026</time></p>
+              <p class="timeline-org">Center for Speech and Language Technologies (CSaLT)</p>
+              <h3>Senior Lab Lead</h3>
+            </div>
+            <span class="timeline-marker" aria-hidden="true">04</span>
+          </article>
+
+          <article class="timeline-item timeline-item-right">
+            <div class="timeline-content">
+              <p class="timeline-date">Aug–Dec 2024 · Jan–May 2025 · Jun–Dec 2025</p>
+              <p class="timeline-org">Lahore University of Management Sciences</p>
+              <h3>Teaching Assistant &amp; Head Teaching Assistant</h3>
+            </div>
+            <span class="timeline-marker" aria-hidden="true">05</span>
+          </article>
+
+          <article class="timeline-item timeline-item-left">
+            <div class="timeline-content">
+              <p class="timeline-date"><time datetime="2024-07">Jul 2024</time> – <time datetime="2024-08">Aug 2024</time></p>
+              <p class="timeline-org">NETSOL Technologies Inc.</p>
+              <h3>Machine Learning Intern</h3>
+            </div>
+            <span class="timeline-marker" aria-hidden="true">06</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="work-section section-wrap section-rule" id="work" aria-labelledby="work-title">
+        <header class="section-heading work-heading">
+          <h2 id="work-title">Selected work</h2>
+        </header>
+
+        <section class="work-category" id="research" aria-labelledby="research-title">
+          <header class="work-category-heading">
+            <span class="eyebrow">01 / RESEARCH</span>
+            <h3 id="research-title">Research</h3>
+          </header>
+
+          <div class="project-list">
+            <article class="project-row project-row-featured" id="research-vlm">
+              <div class="project-meta">
+                <span class="project-number">01</span>
+                <span class="project-kind">Multimodal reasoning</span>
+                <h3>LVAR: Controller-guided latent reasoning</h3>
+              </div>
+              <div class="project-detail">
+                <p class="project-description">
+                  Built a controller-guided framework that inserts visual evidence during recurrent latent reasoning.
+                  A staged training pipeline combined progressive distillation, search-built examples, supervised
+                  controller training, and GRPO.
+                </p>
+                <div class="reasoning-diagram" role="img" aria-label="A visual question passes through evidence selection and latent reasoning before producing an answer.">
+                  <div class="diagram-step">
+                    <span class="diagram-label">INPUT</span>
+                    <strong>Image + question</strong>
+                    <span class="diagram-sub">M3CoT benchmark</span>
+                  </div>
+                  <span class="diagram-connector" aria-hidden="true"></span>
+                  <div class="diagram-step diagram-step-controller">
+                    <span class="diagram-label">CONTROLLER</span>
+                    <strong>Select evidence</strong>
+                    <span class="diagram-sub">recurrent latent state</span>
+                  </div>
+                  <span class="diagram-connector" aria-hidden="true"></span>
+                  <div class="diagram-step">
+                    <span class="diagram-label">OUTPUT</span>
+                    <strong>Answer</strong>
+                    <span class="diagram-sub">shorter trace</span>
+                  </div>
+                </div>
+                <div class="project-metrics project-metrics-four">
+                  <div><strong>66.27%</strong><span>M3CoT test accuracy</span></div>
+                  <div><strong>+14.67 pp</strong><span>vs. explicit CoT</span></div>
+                  <div><strong>+3.4 pp</strong><span>vs. latent baseline</span></div>
+                  <div><strong>~5×</strong><span>shorter traces</span></div>
+                </div>
+                <a class="text-link" href="https://github.com/HaiderDawoodKhan/lvar" target="_blank" rel="noopener noreferrer">
+                  Code on GitHub <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="project-row" id="research-asr">
+              <div class="project-meta">
+                <span class="project-number">02</span>
+                <p class="publication-status"><span class="status-dot" aria-hidden="true"></span>Under Review · AAAI 2027</p>
+                <h3>Noise In, Harm Out</h3>
+              </div>
+              <div class="project-detail">
+                <p class="project-description">
+                  <em>Noise In, Harm Out: A Harm-Weighted Eval of Noise Propagation in ASR-LLM Clinical Scribes</em>
+                  studies how speech-recognition errors propagate into clinical notes, using harm-weighted evaluation
+                  to distinguish consequential mistakes from ordinary transcription noise.
+                </p>
+                <div class="audio-pipeline audio-pipeline-four" role="img" aria-label="Clinical audio is corrupted, transcribed, and evaluated for harm-weighted errors.">
+                  <div><span>01</span><strong>Clinical audio</strong></div>
+                  <span class="pipeline-arrow" aria-hidden="true">→</span>
+                  <div><span>02</span><strong>Audio corruption</strong></div>
+                  <span class="pipeline-arrow" aria-hidden="true">→</span>
+                  <div><span>03</span><strong>Transcription</strong></div>
+                  <span class="pipeline-arrow" aria-hidden="true">→</span>
+                  <div><span>04</span><strong>Harm-weighted eval</strong></div>
+                </div>
+                <p class="publication-authors">Ehsan Latif, Haider Dawood Khan, Shaheer Hammad, Dayyan Ali Akhtar, Agha Ali Raza</p>
+                <a class="text-link" href="https://github.com/HaiderDawoodKhan/differential-diagnosis" target="_blank" rel="noopener noreferrer">
+                  Related audio pipeline <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="project-row" id="research-motive">
+              <div class="project-meta">
+                <span class="project-number">03</span>
+                <span class="project-kind">AI/ML R&amp;D Intern @ Motive · Jun–Sep 2025</span>
+                <h3>Monocular depth for vehicle distance</h3>
+              </div>
+              <div class="project-detail">
+                <p class="project-description">
+                  Built a metric-depth pipeline for vehicle-distance estimation using radar supervision. Curated
+                  dense image/depth pairs with SAM, DINOv2, and DepthAnythingV2, then extended YOLOX with a dense
+                  metric-depth prediction head.
+                </p>
+                <div class="project-metrics project-metrics-compact">
+                  <div><strong>200K+</strong><span>image/depth pairs</span></div>
+                  <div><strong>&gt;20%</strong><span>lower distance MSE</span></div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="work-category selected-projects" id="projects" aria-labelledby="projects-title">
+          <header class="work-category-heading">
+            <span class="eyebrow">02 / SELECTED PROJECTS</span>
+            <h3 id="projects-title">Selected projects</h3>
+            <p>Selected work across alignment, generative modeling, efficient inference, and edge systems.</p>
+          </header>
+
+          <div class="project-list">
+            <article class="project-row" id="project-dpo">
+              <div class="project-meta">
+                <span class="project-number">01</span>
+                <span class="project-kind">LLM post-training</span>
+                <h3>Preference alignment with LoRA</h3>
+              </div>
+              <div class="project-detail">
+                <p class="project-description">
+                  Built a lightweight decoder-only Transformer with RMSNorm, RoPE, grouped-query attention, and
+                  SwiGLU. LoRA adapters trained about 1% of parameters, while a custom DPO pipeline improved held-out
+                  preference accuracy.
+                </p>
+                <div class="project-metrics project-metrics-compact">
+                  <div><strong>~1%</strong><span>parameters trained</span></div>
+                  <div><strong>+16%</strong><span>preference accuracy</span></div>
+                </div>
+                <a class="text-link" href="https://github.com/HaiderDawoodKhan/SmolLM-LoRA-DPO" target="_blank" rel="noopener noreferrer">
+                  Code on GitHub <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="project-row" id="project-compression">
+              <div class="project-meta">
+                <span class="project-number">02</span>
+                <span class="project-kind">Efficient ML</span>
+                <h3>Model compression for efficient inference</h3>
+              </div>
+              <div class="project-detail">
+                <p class="project-description">
+                  On VGG-11, 70% unstructured sparsity raised accuracy by 1.24%. Channel pruning cut MACs by 68.7%
+                  and latency by 65%, retaining 91.84% accuracy. For ResNet, mixed precision matched FP32 at ~4×
+                  smaller size and QAT beat PTQ; Hints distillation reached 67.73% on CIFAR-100.
+                </p>
+                <div class="compression-visual" role="img" aria-label="Channel pruning reduced multiply-accumulate operations by 68.7 percent and latency by 65 percent.">
+                  <div class="compression-row">
+                    <span>MACs</span>
+                    <div class="bar-track"><i style="--bar: 31.3%"></i></div>
+                    <strong>−68.7%</strong>
+                  </div>
+                  <div class="compression-row">
+                    <span>Latency</span>
+                    <div class="bar-track"><i style="--bar: 35%"></i></div>
+                    <strong>−65%</strong>
+                  </div>
+                  <div class="compression-footnote"><span>Baseline</span><span>After channel pruning</span></div>
+                </div>
+                <div class="project-metrics project-metrics-compact">
+                  <div><strong>91.84%</strong><span>accuracy</span></div>
+                  <div><strong>67.73%</strong><span>Hints distillation</span></div>
+                </div>
+                <a class="text-link" href="assets/report3.pdf" target="_blank" rel="noopener noreferrer">
+                  Read co-authored report <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </article>
+
+            <article class="project-row" id="project-diffusion">
+              <div class="project-meta">
+                <span class="project-number">03</span>
+                <span class="project-kind">Generative modeling</span>
+                <h3>Generative image modeling &amp; diffusion</h3>
+              </div>
+              <div class="project-detail">
+                <p class="project-description">
+                  Implemented a class-conditioned U-Net DDPM with a cosine noise schedule and sinusoidal time
+                  embeddings, and explored β-VAE representations on CelebA and autoregressive PixelCNN generation.
+                  Stable Diffusion experiments covered classifier-free guidance, SD 2 inpainting, and style transfer
+                  with Canny ControlNet and IP-Adapter.
+                </p>
+                <div class="diffusion-line" role="img" aria-label="Diffusion experiments covered text guidance, masked inpainting, and structure-guided style transfer.">
+                  <span>Prompt + CFG</span><i aria-hidden="true">/</i><span>Inpainting</span><i aria-hidden="true">/</i><span>Canny structure</span><i aria-hidden="true">/</i><span>IP-Adapter style</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-row" id="project-number-plate">
+              <div class="project-meta">
+                <span class="project-number">04</span>
+                <span class="project-kind">Computer vision</span>
+                <h3>Automated number plate detection &amp; logging</h3>
+              </div>
+              <div class="project-detail">
+                <p class="project-description">
+                  Fine-tuned a YOLO detector for plate localization, then combined contour-based character
+                  segmentation with a CNN classifier. A Streamlit search and logging interface retrieves matching
+                  vehicle images and metadata from plate-text queries.
+                </p>
+                <div class="project-metrics project-metrics-compact">
+                  <div><strong>99%</strong><span>validation accuracy</span></div>
+                </div>
+                <div class="plate-pipeline" role="img" aria-label="Number plates are localized, segmented into characters, recognized, and indexed for search.">
+                  <span>Localize</span><i aria-hidden="true">→</i><span>Segment</span><i aria-hidden="true">→</i><span>Recognize</span><i aria-hidden="true">→</i><span>Search</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-row" id="project-edge-ai">
+              <div class="project-meta">
+                <span class="project-number">05</span>
+                <span class="project-kind">Edge ML</span>
+                <h3>Edge AI human activity recognition</h3>
+              </div>
+              <div class="project-detail">
+                <p class="project-description">
+                  Trained a six-class activity classifier on 20 Hz IMU windows and applied mixed-precision
+                  post-training quantization. Deployed it to an ESP32 with an MPU6050 sensor, serving live
+                  predictions through a lightweight Flask interface.
+                </p>
+                <div class="project-metrics project-metrics-compact">
+                  <div><strong>95.34%</strong><span>classification accuracy</span></div>
+                </div>
+                <div class="edge-pipeline" role="img" aria-label="IMU windows are classified on an ESP32 and displayed in a live interface.">
+                  <span>20 Hz IMU</span><i aria-hidden="true">→</i><span>ESP32 inference</span><i aria-hidden="true">→</i><span>Live display</span>
+                </div>
+                <a class="text-link" href="https://github.com/HaiderDawoodKhan/Edge-AI" target="_blank" rel="noopener noreferrer">
+                  Code on GitHub <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </article>
+
+          </div>
+
+          <details class="more-projects">
+            <summary>
+              <span>See more projects</span>
+              <span class="more-projects-count">2 additional projects</span>
+            </summary>
+            <div class="project-list more-project-list">
+              <article class="project-row" id="project-grpo-clipping">
+                <div class="project-meta">
+                  <span class="project-number">06</span>
+                  <span class="project-kind">RLHF · GRPO</span>
+                  <h3>Token-level clipping analysis</h3>
+                </div>
+                <div class="project-detail">
+                  <p class="project-description">
+                    Instrumented GRPO to track token-level clipping and build a vocabulary around refusal and
+                    moral-violation cues while aligning Qwen3-0.6B and OLMo-1B-SFT on Do-Not-Answer. Compared
+                    vocabulary-freeze and no-clipping interventions, then measured refusal rates with
+                    Qwen2.5-1.5B-Instruct as an LLM judge. The analysis examined how high-entropy safety tokens and
+                    clipping affect training stability.
+                  </p>
+                </div>
+              </article>
+
+              <article class="project-row" id="project-brain-tumor">
+                <div class="project-meta">
+                  <span class="project-number">07</span>
+                  <span class="project-kind">Medical imaging</span>
+                  <h3>Brain tumor segmentation</h3>
+                </div>
+                <div class="project-detail">
+                  <p class="project-description">
+                    Trained a convolutional autoencoder on 3,064 T1-weighted contrast-enhanced brain images, using
+                    image preprocessing and Dice loss for pixel-level tumor localization.
+                  </p>
+                  <div class="project-metrics project-metrics-compact">
+                    <div><strong>0.83</strong><span>mean IoU on held-out images</span></div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </details>
+        </section>
+      </section>
+
+      <section class="background-section section-wrap section-rule" id="education" aria-labelledby="education-title">
+        <header class="section-heading">
+          <h2 id="education-title">Education</h2>
+        </header>
+
+        <div class="background-grid">
+          <div class="education-list">
+            <article class="education-entry">
+              <div class="education-date">2026–2028</div>
+              <div>
+                <h3>University of Michigan</h3>
+                <p class="education-degree">M.S. Computer Science and Engineering</p>
+                <p>Ann Arbor, Michigan</p>
+                <p class="education-coursework">Reinforcement Learning · Human-AI Interaction</p>
+              </div>
+            </article>
+            <article class="education-entry">
+              <div class="education-date">2022–2026</div>
+              <div>
+                <h3>Lahore University of Management Sciences</h3>
+                <p class="education-degree">B.S. Computer Science</p>
+                <p>Lahore, Pakistan</p>
+                <p class="education-honors"><strong>3.97 / 4.0</strong> · High Distinction · Top 2% of CS cohort</p>
+                <p class="education-coursework">Advanced ML · Vision-language models · Deep learning · Computer vision · Generative AI</p>
+                <p class="education-coursework">Dean’s Honor List · 100% Merit Scholarship · Joint 1st in SBASSE batch (2022–24)</p>
+              </div>
+            </article>
+          </div>
+
+          <section class="toolkit" aria-labelledby="toolkit-title">
+            <h3 id="toolkit-title">Technical toolkit</h3>
+            <dl>
+              <div>
+                <dt>ML &amp; research</dt>
+                <dd>PyTorch, Hugging Face, scikit-learn, OpenCV, NumPy, Pandas, Weights &amp; Biases, TFLite</dd>
+              </div>
+              <div>
+                <dt>Languages</dt>
+                <dd>Python, C/C++, JavaScript, TypeScript, SQL, Bash</dd>
+              </div>
+              <div>
+                <dt>Engineering</dt>
+                <dd>Next.js, FastAPI, Flask, PostgreSQL, Docker, AWS, Git</dd>
+              </div>
+            </dl>
+          </section>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact" aria-label="Contact">
+        <div class="contact-inner section-wrap">
+          <a class="contact-email" href="mailto:haiderdawood92@gmail.com">haiderdawood92@gmail.com</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="section-wrap footer-inner">
+        <span>Haider Dawood Khan</span>
+        <span>Ann Arbor, MI <span aria-hidden="true">·</span> <span id="copyright-year">2026</span></span>
+        <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+      </div>
+    </footer>
+  </body>
 </html>
